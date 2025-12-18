@@ -1,0 +1,30 @@
+{
+    "alunos" [ {nome : 'Julia',
+    sobrenome: 'Oliveira',
+    gmail: 'juliaarb38@gmail.com'},
+
+    {nome : 'Julia',
+    sobrenome: 'Azevedo',
+    gmail: 'julia.m.azevedo@ba.estudante.senai.br'},
+
+
+    {nome : 'Rafael',
+    sobrenome: 'Magno',
+    gmail: 'rafael.m.reis@ba.estudante.senai.br'},
+
+    {nome : 'Nicole',
+    sobrenome: 'Portela',
+    gmail: 'nicolenpcandeias@gmail.com'},
+
+    {nome : 'Maiane',
+    sobrenome: 'Rocha',
+    gmail: 'maiane12rocha@gmail.com'},
+
+    {nome : 'Kevin',
+    sobrenome: 'Lenon',
+    gmail: 'kevin.l.santos@ba.estudante.senai.br'},
+
+    {nome : 'Thalita',
+    sobrenome: 'Silva',
+    gmail: 'thalita.nascimento@ba.estudante.senai.br'} ]
+}

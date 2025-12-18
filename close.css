@@ -1,0 +1,137 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0e0e0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  width: 100%;
+  max-width: 400px;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 auto 1.5rem;
+  animation: scaleIn 0.6s ease;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+h1 {
+  color: #333;
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.message {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.message strong {
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+.submessage {
+  color: #999;
+  font-size: 0.9rem;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.info-box {
+  background: #e3f2fd;
+  border-left: 4px solid #1a73e8;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.info-box p {
+  margin: 0;
+  color: #1565c0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.btn-close {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  transition: background 0.2s;
+}
+
+.btn-close:hover {
+  background: #45a049;
+}
+
+.btn-home {
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background 0.2s;
+}
+
+.btn-home:hover {
+  background: #0d47a1;
+}
+
+.link-disconnect {
+  color: #999;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.link-disconnect:hover {
+  color: #666;
+}

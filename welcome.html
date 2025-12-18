@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo - Sistema FiEB</title>
+    <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+    <section class="principal">
+        <div class="card">
+            <img src="logo.png" alt="logo" class="logo">
+            
+            <div class="welcome-content">
+                <h2 class="welcome-title">Bem-vindo(a) de volta,</h2>
+                <p class="user-name" id="userName"></p>
+                <p class="user-info">Turma: <span id="turma"></span></p>
+                <p class="user-info">Sua sala é a <strong id="sala"></strong></p>
+                
+                <a href="#" class="link-texto" id="notUser">Não sou <span id="nameLink"></span></a>
+            </div>
+
+            <label class="check">
+                <input type="checkbox" id="checkbox1" checked>
+                <span>Li e estou ciente das condições de tratamento de dados pessoais descritas nas <strong>Políticas de Privacidade</strong> e nos <strong>Termos de Uso</strong></span>
+            </label>
+
+            <label class="check">
+                <input type="checkbox" id="checkbox2">
+                <span>Eu aceito que meus dados de contato (nome, e-mail e telefone) sejam tratados para fins de e-mails, SMS, mensagens instantâneas relacionadas a marketing.</span>
+            </label>
+
+            <button class="submit" id="continuar">Continuar</button>
+        </div>
+    </section>
+
+    <script src="welcome.js"></script>
+</body>
+</html>
