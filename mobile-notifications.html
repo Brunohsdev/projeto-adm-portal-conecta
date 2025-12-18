@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectado - Sistema FiEB</title>
+    <link rel="stylesheet" href="mobile-notifications.css">
+</head>
+<body>
+    <div class="notifications-overlay" id="notificationsOverlay">
+        <!-- Notificações serão inseridas aqui -->
+    </div>
+
+    <section class="principal">
+        <div class="card">
+            <img src="logo.png" alt="logo" class="logo">
+            
+            <div class="success-message">
+                <div class="check-icon">✓</div>
+                <h2>Conectado com sucesso!</h2>
+                <p class="user-connected">Olá, <strong id="userNameConnected"></strong></p>
+                <p class="connection-info">✓ Conectado à rede FiEB WiFi</p>
+            </div>
+
+            <div class="info-message">
+                <p>📱 Você já pode minimizar esta página e navegar livremente!</p>
+            </div>
+
+            <button class="btn-primary" onclick="window.location.href='https://www.google.com'">
+                Começar a navegar
+            </button>
+            
+            <button class="btn-secondary" onclick="fecharPagina()">
+                Minimizar navegador
+            </button>
+            
+            <a href="index.html" class="link-disconnect" onclick="localStorage.clear()">
+                Desconectar da rede
+            </a>
+        </div>
+    </section>
+
+    <script src="mobile-notifications.js"></script>
+</body>
+</html>
