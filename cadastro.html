@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+   
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png">
+        </div>
+
+        <div class="form-card">
+            <p class="form-description">Preencha o formulário abaixo para se conectar a internet</p>
+
+            <form id="cadastroForm">
+                <input 
+                    type="text" 
+                    id="nomeCompleto" 
+                    class="input-field" 
+                    placeholder="Nome completo"
+                    required
+                >
+
+                <input 
+                    type="email" 
+                    id="email" 
+                    class="input-field" 
+                    placeholder="E-mail"
+                    required
+                >
+
+                <input 
+                    type="text" 
+                    id="cpf" 
+                    class="input-field" 
+                    placeholder="CPF"
+                    maxlength="14"
+                    required
+                >
+
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="checkbox1" required>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">
+                            Li e estou ciente das condições de tratamento de dados pessoais descritas nas 
+                            <a href="#" class="link">Políticas de Privacidade</a> e nos 
+                            <a href="#" class="link">Termos de Uso</a>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="checkbox2">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">
+                            Eu aceito que meus dados de contato (nome, e-mail e telefone) sejam tratados para fins de e-mails, SMS, mensagens instantâneas relacionadas a marketing.
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" class="cadastrar-btn">CADASTRAR</button>
+
+                <a href="index.html" class="voltar-btn">Voltar</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="cadastro.js"></script>
+</body>
+</html>
