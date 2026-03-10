@@ -5,8 +5,8 @@ import './Conectado.css'
 
 const NOTIFICACOES = [
   { icon: '✓', title: 'Conectado ao WiFi FiEB', body: null, url: null, delay: 500 },
-  { icon: '🎉', title: 'NauFest 2026', body: '15–17 de março. O maior evento de inovação.', url: 'https://www.senai.br', delay: 3500 },
-  { icon: '🚀', title: 'Mundo SENAI', body: 'Descubra as tendências em tecnologia.', url: 'https://www.senai.br', delay: 7000 },
+  { icon: '🎉', title: 'Desafio Liga Jovem', body: 'A Olimpíada de empreendorismo do SEBRAE.', url: 'https://desafioligajovem.com.br/', delay: 3500 },
+  { icon: '🚀', title: 'Mundo SENAI', body: 'Descubra as tendências em tecnologia.', url: 'https://mundosenai.senaibahia.com.br/', delay: 7000 },
 ]
 
 export default function Conectado() {
@@ -35,20 +35,20 @@ export default function Conectado() {
   }, [aluno])
 
   function criarPopup(icon, title, body, url) {
-    if (!overlayRef.current) return
-    const el = document.createElement('div')
-    el.className = 'notif-popup'
-    el.innerHTML = `
-      <div class="notif-icon">\${icon}</div>
-      <div class="notif-content">
-        <p class="notif-title">\${title}</p>
-        \${body ? \`<p class="notif-body">\${body}</p>\` : ''}
-      </div>
-    `
-    if (url) el.onclick = () => window.open(url, '_blank')
-    overlayRef.current.appendChild(el)
-    setTimeout(() => el.remove(), 4000)
-  }
+  if (!overlayRef.current) return
+  const el = document.createElement('div')
+  el.className = 'notif-popup'
+  el.innerHTML = `
+    <div class="notif-icon">${icon}</div>
+    <div class="notif-content">
+      <p class="notif-title">${title}</p>
+      ${body ? `<p class="notif-body">${body}</p>` : ''}
+    </div>
+  `
+  if (url) el.onclick = () => window.open(url, '_blank')
+  overlayRef.current.appendChild(el)
+  setTimeout(() => el.remove(), 4000)
+}
 
   function dispararNotifSistema(title, body, url) {
     if ('Notification' in window && Notification.permission === 'granted') {
@@ -81,9 +81,6 @@ export default function Conectado() {
             Começar a navegar
           </button>
 
-          <button className="con-btn-blue" onClick={() => alert('Você já pode minimizar esta página.')}>
-            Minimizar navegador
-          </button>
 
           <a
             href="#"

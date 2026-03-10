@@ -117,7 +117,7 @@
 .login-check strong { color: #1a73e8; }
 
 .btn-conectar {
-  background: #3d3d3d;
+  background: #3b5998;
   color: #fff;
   border: none;
   width: 100%;
@@ -131,7 +131,7 @@
   transition: background 0.2s, transform 0.1s;
 }
 
-.btn-conectar:hover { background: #222; }
+.btn-conectar:hover { background: #072b79; }
 .btn-conectar:active { transform: scale(0.98); }
 .btn-conectar:disabled { background: #999; cursor: not-allowed; }
 

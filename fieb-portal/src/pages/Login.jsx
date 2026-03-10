@@ -53,7 +53,7 @@ export default function Login() {
             onChange={e => setEmail(e.target.value)}
           />
           {erro && <p className="login-erro">{erro}</p>}
-          <label className="login-check">
+          <label className="login-check" id='obrigatorio'>
             <input type="checkbox" checked={check1} onChange={e => setCheck1(e.target.checked)} />
             <span>Li e estou ciente das condições de tratamento de dados pessoais descritas nas <strong>Políticas de Privacidade</strong> e nos <strong>Termos de Uso</strong>.*</span>
           </label>
