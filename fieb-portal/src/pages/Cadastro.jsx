@@ -6,8 +6,6 @@ import './Cadastro.css'
 
 import { validarEmail } from '../utils/validarEmail'
 
-// dentro do handleConectar / handleCadastrar:
-
 export default function Cadastro() {
   const navigate = useNavigate()
   const location = useLocation()
