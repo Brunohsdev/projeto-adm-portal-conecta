@@ -102,3 +102,14 @@
 
 .wlc-btn:hover { background: #222; }
 .wlc-btn:active { transform: scale(0.98); }
+
+
+.wlc-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

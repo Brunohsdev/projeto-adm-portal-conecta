@@ -1,11 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAluno } from '../context/Alunocontext'
+import { supabase } from '../services/supabase'
+import { registrarServiceWorker, gerarSubscription, salvarSubscription, dispararPushWelcome } from '../services/push'
 import './Welcome.css'
 
 export default function Welcome() {
   const navigate = useNavigate()
   const { aluno, limparAluno } = useAluno()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (!aluno) navigate('/')
@@ -14,11 +17,19 @@ export default function Welcome() {
   if (!aluno) return null
 
   async function handleContinuar() {
-    if ('Notification' in window && Notification.permission === 'default') {
-      await Notification.requestPermission()
+    setLoading(true)
+    try {
+      const registro = await registrarServiceWorker()
+      const subscription = await gerarSubscription(registro)
+      await salvarSubscription(supabase, subscription)
+      dispararPushWelcome().catch(console.error)
+    } catch (err) {
+      console.warn('Push não disponível:', err.message)
+    } finally {
+      setLoading(false)
+      sessionStorage.setItem('fiebConectado', 'true')
+      navigate('/conectado')
     }
-    sessionStorage.setItem('fiebConectado', 'true')
-    navigate('/conectado')
   }
 
   return (
@@ -31,8 +42,8 @@ export default function Welcome() {
           <p className="wlc-nome">{aluno.nome}</p>
           <p className="wlc-detail">Turma: <span>{aluno.turma}</span></p>
           <p className="wlc-detail">Sua sala é a <strong>{aluno.sala}</strong></p>
-          <a
-            href="#"
+          
+            <a href="#"
             className="wlc-notuser"
             onClick={e => { e.preventDefault(); limparAluno(); navigate('/') }}
           >
@@ -50,8 +61,8 @@ export default function Welcome() {
           <span>Eu aceito que meus dados de contato sejam tratados para fins de e-mails e marketing.</span>
         </label>
 
-        <button className="wlc-btn" onClick={handleContinuar}>
-          Continuar
+        <button className="wlc-btn" onClick={handleContinuar} disabled={loading}>
+          {loading ? <span className="wlc-spinner" /> : 'Continuar'}
         </button>
       </div>
     </section>

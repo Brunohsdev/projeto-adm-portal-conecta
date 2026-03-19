@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { buscarAlunoPorEmail, atualizarSala } from '../services/supabase'
-import {useAluno} from '../context/Alunocontext'
+import { useAluno } from '../context/Alunocontext'
+import { validarEmail } from '../utils/validarEmail'
 import './Login.css'
 
 export default function Login() {
@@ -16,8 +17,14 @@ export default function Login() {
   async function handleConectar(e) {
     e.preventDefault()
     setErro('')
+
     if (!email.trim()) return setErro('Preencha seu e-mail.')
+
+    const { valido, erro: erroEmail } = validarEmail(email)
+    if (!valido) return setErro(erroEmail)
+
     if (!check1) return setErro('Aceite as Políticas de Privacidade e Termos de Uso.')
+
     setLoading(true)
     try {
       const aluno = await buscarAlunoPorEmail(email.trim())
@@ -38,10 +45,10 @@ export default function Login() {
   return (
     <section className="login-bg">
       <div className="login-card">
-        <img src="../logo.png" alt="FiEB" className="login-logo" />
+        <img src="/logo.png" alt="FiEB" className="login-logo" />
         <form onSubmit={handleConectar} className="login-form" noValidate>
           <button type="button" className="btn-facebook">
-            <img src="../face.png" alt="" />
+            <img src="/face.png" alt="" />
             Conectar usando o Facebook
           </button>
           <div className="divider"><span>ou</span></div>
@@ -53,7 +60,7 @@ export default function Login() {
             onChange={e => setEmail(e.target.value)}
           />
           {erro && <p className="login-erro">{erro}</p>}
-          <label className="login-check" id='obrigatorio'>
+          <label className="login-check" id="obrigatorio">
             <input type="checkbox" checked={check1} onChange={e => setCheck1(e.target.checked)} />
             <span>Li e estou ciente das condições de tratamento de dados pessoais descritas nas <strong>Políticas de Privacidade</strong> e nos <strong>Termos de Uso</strong>.*</span>
           </label>

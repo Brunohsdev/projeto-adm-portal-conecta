@@ -4,6 +4,10 @@ import { buscarAlunoPorEmail, cadastrarAluno } from '../services/supabase'
 import { useAluno } from '../context/Alunocontext'
 import './Cadastro.css'
 
+import { validarEmail } from '../utils/validarEmail'
+
+// dentro do handleConectar / handleCadastrar:
+
 export default function Cadastro() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -29,7 +33,8 @@ export default function Cadastro() {
 
     if (!form.nome.trim()) return setErro('Preencha seu nome.')
     if (!form.email.trim()) return setErro('Preencha seu e-mail.')
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) return setErro('E-mail inválido.')
+    const { valido, erro: erroEmail } = validarEmail(form.email)
+    if (!valido) return setErro(erroEmail)
     if (!form.check1) return setErro('Aceite as Políticas de Privacidade e Termos de Uso.')
 
     setLoading(true)
