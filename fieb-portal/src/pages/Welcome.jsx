@@ -16,59 +16,22 @@ export default function Welcome() {
 
   if (!aluno) return null
 
-  // async function handleContinuar() {
-  //   setLoading(true)
-  //   try {
-  //     const registro = await registrarServiceWorker()
-  //     const subscription = await gerarSubscription(registro)
-  //     await salvarSubscription(supabase, subscription)
-  //     dispararPushWelcome().catch(console.error)
-  //   } catch (err) {
-  //     console.warn('Push não disponível:', err.message)
-  //   } finally {
-  //     setLoading(false)
-  //     sessionStorage.setItem('fiebConectado', 'true')
-  //     navigate('/conectado')
-  //   }
-  // }
-
   async function handleContinuar() {
-  setLoading(true)
-  try {
-    // DEBUG TEMPORÁRIO
-    if (!('serviceWorker' in navigator)) {
-      alert('❌ Service Worker não suportado neste browser')
+    setLoading(true)
+    try {
+      const registro = await registrarServiceWorker()
+      const subscription = await gerarSubscription(registro)
+      await salvarSubscription(supabase, subscription)
+      dispararPushWelcome().catch(console.error)
+    } catch (err) {
+      console.warn('Push não disponível:', err.message)
+    } finally {
       setLoading(false)
-      return
+      sessionStorage.setItem('fiebConectado', 'true')
+      navigate('/conectado')
     }
-    alert('✅ Service Worker suportado')
-
-    if (!('Notification' in window)) {
-      alert('❌ Notificações não suportadas')
-      setLoading(false)
-      return
-    }
-    alert(`🔔 Permissão atual: ${Notification.permission}`)
-
-    const registro = await registrarServiceWorker()
-    alert('✅ Service Worker registrado')
-
-    const subscription = await gerarSubscription(registro)
-    alert('✅ Subscription gerada')
-
-    await salvarSubscription(supabase, subscription)
-    alert('✅ Subscription salva no Supabase')
-
-    dispararPushWelcome().catch(e => alert('❌ Erro no push: ' + e.message))
-
-  } catch (err) {
-    alert('❌ Erro: ' + err.message)
-  } finally {
-    setLoading(false)
-    sessionStorage.setItem('fiebConectado', 'true')
-    navigate('/conectado')
   }
-}
+
   return (
     <section className="wlc-bg">
       <div className="wlc-card">

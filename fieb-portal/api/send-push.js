@@ -15,13 +15,6 @@ const supabase = createClient(
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' })
 
-    try {
-  await dispararPushWelcome()
-  alert('✅ Push disparado com sucesso')
-} catch (e) {
-  alert('❌ Erro no push: ' + e.message)
-}
-
   try {
     const { notificacoes } = req.body
     const { data: subscriptions, error } = await supabase.from('push_subscriptions').select('*')
