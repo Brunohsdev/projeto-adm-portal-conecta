@@ -21,8 +21,8 @@ export default function Welcome() {
     try {
       const registro = await registrarServiceWorker()
       const subscription = await gerarSubscription(registro)
-      await salvarSubscription(supabase, subscription)
-      dispararPushWelcome().catch(console.error)
+     await salvarSubscription(supabase, subscription, aluno.email)
+      dispararPushWelcome(aluno.email).catch(console.error)
     } catch (err) {
       console.warn('Push não disponível:', err.message)
     } finally {
@@ -43,7 +43,7 @@ export default function Welcome() {
           <p className="wlc-detail">Turma: <span>{aluno.turma}</span></p>
           <p className="wlc-detail">Sua sala é a <strong>{aluno.sala}</strong></p>
           
-            <a href="#"
+            < a href="#"
             className="wlc-notuser"
             onClick={e => { e.preventDefault(); limparAluno(); navigate('/') }}
           >

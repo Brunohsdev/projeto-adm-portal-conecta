@@ -16,8 +16,13 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' })
 
   try {
-    const { notificacoes } = req.body
-    const { data: subscriptions, error } = await supabase.from('push_subscriptions').select('*')
+    const { notificacoes, email } = req.body
+
+    const { data: subscriptions, error } = await supabase
+      .from('push_subscriptions')
+      .select('*')
+      .eq('aluno_email', email)  // ← só o aluno que logou
+
     if (error) throw error
     if (!subscriptions?.length) return res.status(200).json({ message: 'Nenhuma subscription' })
 

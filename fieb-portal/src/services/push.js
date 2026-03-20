@@ -23,11 +23,19 @@ export async function gerarSubscription(registro) {
   })
 }
 
-export async function salvarSubscription(supabase, subscription) {
+export async function salvarSubscription(supabase, subscription, email) {
   const sub = subscription.toJSON()
   const { error } = await supabase
     .from('push_subscriptions')
-    .upsert({ endpoint: sub.endpoint, p256dh: sub.keys.p256dh, auth: sub.keys.auth }, { onConflict: 'endpoint' })
+    .upsert(
+      {
+        endpoint: sub.endpoint,
+        p256dh: sub.keys.p256dh,
+        auth: sub.keys.auth,
+        aluno_email: email
+      },
+      { onConflict: 'endpoint' }
+    )
   if (error) throw error
 }
 
@@ -36,6 +44,7 @@ export async function dispararPushWelcome() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
+    email,
       notificacoes: [
       { icon: '✓', title: 'Conectado ao WiFi FiEB', body: null, url: null, delay: 500 },
       { icon: '🎉', title: 'Desafio Liga Jovem', body: 'A Olimpíada de empreendorismo do SEBRAE.', url: 'https://desafioligajovem.com.br/', delay: 3500 },
