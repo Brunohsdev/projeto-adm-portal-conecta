@@ -18,10 +18,15 @@ export default async function handler(req, res) {
   try {
     const { notificacoes, email } = req.body
 
+    console.log('📧 Email recebido:', email)
+
     const { data: subscriptions, error } = await supabase
       .from('push_subscriptions')
       .select('*')
-      .eq('aluno_email', email)  // ← só o aluno que logou
+      .eq('aluno_email', email)
+
+    console.log('📱 Subscriptions encontradas:', subscriptions?.length)
+    console.log('📱 Dados:', JSON.stringify(subscriptions))
 
     if (error) throw error
     if (!subscriptions?.length) return res.status(200).json({ message: 'Nenhuma subscription' })
@@ -35,11 +40,14 @@ export default async function handler(req, res) {
             { endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } },
             payload
           ).catch(err => {
-            if (err.statusCode === 410) return supabase.from('push_subscriptions').delete().eq('endpoint', sub.endpoint)
+            if (err.statusCode === 410) {
+              return supabase.from('push_subscriptions').delete().eq('endpoint', sub.endpoint)
+            }
           })
         )
       )
     }
+
     return res.status(200).json({ success: true })
   } catch (err) {
     console.error(err)
