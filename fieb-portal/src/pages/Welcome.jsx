@@ -20,16 +20,30 @@ export default function Welcome() {
  async function handleContinuar() {
   setLoading(true)
   try {
+    alert('1️⃣ Iniciando FCM...')
     const token = await registrarFCM()
+    alert('2️⃣ Token gerado: ' + token.substring(0, 20) + '...')
     await salvarTokenFCM(supabase, token, aluno.email)
+    alert('3️⃣ Token salvo no Supabase!')
     dispararPushFCM(aluno.email).catch(console.error)
   } catch (err) {
-    console.warn('FCM não disponível:', err.message)
+    alert('❌ Erro: ' + err.message)
   } finally {
     setLoading(false)
     sessionStorage.setItem('fiebConectado', 'true')
     navigate('/conectado')
   }
+  // try {
+  //   const token = await registrarFCM()
+  //   await salvarTokenFCM(supabase, token, aluno.email)
+  //   dispararPushFCM(aluno.email).catch(console.error)
+  // } catch (err) {
+  //   console.warn('FCM não disponível:', err.message)
+  // } finally {
+  //   setLoading(false)
+  //   sessionStorage.setItem('fiebConectado', 'true')
+  //   navigate('/conectado')
+  // }
 }
 
   return (
