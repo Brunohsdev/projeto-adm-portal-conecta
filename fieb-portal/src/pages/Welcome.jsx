@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAluno } from '../context/Alunocontext'
 import { supabase } from '../services/supabase'
-import { registrarServiceWorker, gerarSubscription, salvarSubscription, dispararPushWelcome } from '../services/push'
+import { registrarFCM, salvarTokenFCM, dispararPushFCM } from '../services/fcm'
+
 import './Welcome.css'
 
 export default function Welcome() {
@@ -16,21 +17,20 @@ export default function Welcome() {
 
   if (!aluno) return null
 
-  async function handleContinuar() {
-    setLoading(true)
-    try {
-      const registro = await registrarServiceWorker()
-      const subscription = await gerarSubscription(registro)
-     await salvarSubscription(supabase, subscription, aluno.email)
-      dispararPushWelcome(aluno.email).catch(console.error)
-    } catch (err) {
-      console.warn('Push não disponível:', err.message)
-    } finally {
-      setLoading(false)
-      sessionStorage.setItem('fiebConectado', 'true')
-      navigate('/conectado')
-    }
+ async function handleContinuar() {
+  setLoading(true)
+  try {
+    const token = await registrarFCM()
+    await salvarTokenFCM(supabase, token, aluno.email)
+    dispararPushFCM(aluno.email).catch(console.error)
+  } catch (err) {
+    console.warn('FCM não disponível:', err.message)
+  } finally {
+    setLoading(false)
+    sessionStorage.setItem('fiebConectado', 'true')
+    navigate('/conectado')
   }
+}
 
   return (
     <section className="wlc-bg">
