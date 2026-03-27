@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app'
 import { getMessaging, getToken, onMessage } from 'firebase/messaging'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBlS5n9YbQBGKibHc2kyeJCDluZFqgeUKI",
-  authDomain: "portal-conecta-890fb.firebaseapp.com",
-  projectId: "portal-conecta-890fb",
-  storageBucket: "portal-conecta-890fb.firebasestorage.app",
-  messagingSenderId: "9058505397",
-  appId: "1:9058505397:web:2c110fdea573a15fb8a4fc"
+  apiKey: "AIzaSyBOgqjd4YHXObgFdGz5apgovRLtOU6fkXU",
+  authDomain: "portalconecta-a31df.firebaseapp.com",
+  projectId: "portalconecta-a31df",
+  storageBucket: "portalconecta-a31df.firebasestorage.app",
+  messagingSenderId: "13539357652",
+  appId: "1:13539357652:web:884aa5312e06af34de1c41"
 }
 
 const app = initializeApp(firebaseConfig)
@@ -55,7 +55,6 @@ export async function dispararPushFCM(email) {
   })
 }
 
-// Notificação em foreground (site aberto)
 export function ouvirMensagens(callback) {
   onMessage(messaging, payload => {
     callback(payload.data)
