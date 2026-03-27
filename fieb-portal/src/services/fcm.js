@@ -21,9 +21,13 @@ export async function registrarFCM() {
   const permissao = await Notification.requestPermission()
   if (permissao !== 'granted') throw new Error('Permissão negada')
 
+  // Registra e ESPERA o service worker ficar ativo
+  const registro = await navigator.serviceWorker.register('/firebase-messaging-sw.js')
+  await navigator.serviceWorker.ready
+
   const token = await getToken(messaging, {
     vapidKey: VAPID_KEY,
-    serviceWorkerRegistration: await navigator.serviceWorker.register('/firebase-messaging-sw.js')
+    serviceWorkerRegistration: registro
   })
 
   if (!token) throw new Error('Token FCM não gerado')
